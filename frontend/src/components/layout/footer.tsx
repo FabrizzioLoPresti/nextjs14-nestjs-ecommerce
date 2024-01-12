@@ -38,7 +38,9 @@ const Footer = (props: Props) => {
         </p>
         <p>
           Developed by{' '}
-          <Link href="https://fabrox-dev.vercel.app/">Fabrizio Lo Presti</Link>
+          <Link href="https://fabrox-dev.vercel.app/" target="_blank">
+            Fabrizio Lo Presti
+          </Link>
         </p>
       </div>
     </footer>
