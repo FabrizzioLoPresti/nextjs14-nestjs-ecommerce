@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import ChangeThemeButton from './change-theme-button';
 
 type Props = {};
 
@@ -31,6 +32,10 @@ const Footer = (props: Props) => {
             </li>
           </ul>
         </div>
+
+        <div>
+          <ChangeThemeButton />
+        </div>
       </div>
       <div className="text-center py-4">
         <p className="text-sm">
@@ -39,7 +44,7 @@ const Footer = (props: Props) => {
         <p>
           Developed by{' '}
           <Link href="https://fabrox-dev.vercel.app/" target="_blank">
-            Fabrizio Lo Presti
+            Fabrizzio Lo Presti
           </Link>
         </p>
       </div>

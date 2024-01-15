@@ -10,8 +10,8 @@ type Props = {};
 
 const ProductCard = (props: Props) => {
   return (
-    <article className="w-fit max-w-[300px] min-h-[400px] max-h-[420px] flex flex-col justify-between bg-zinc-500 overflow-hidden rounded-md shadow-md ">
-      <Link href="/product/1" className="block w-80 h-[460px] overflow-hidden">
+    <article className="w-fit max-w-[300px] min-h-[400px] max-h-[420px] flex flex-col justify-between bg-zinc-500 overflow-hidden rounded-md shadow-md mx-auto">
+      <Link href="/products/1" className="block w-80 h-[460px] overflow-hidden">
         <Image
           src="/img/grid/voice_assistants.webp"
           alt="placeholder"
@@ -21,7 +21,7 @@ const ProductCard = (props: Props) => {
         />
       </Link>
       <div className="p-4 flex flex-col gap-y-4 h-full justify-between">
-        <Link href="/product/1">
+        <Link href="/products/1">
           <h3 className="text-lg font-bold text-zinc-900 text-wrap border-l-2 pl-4 border-l-zinc-100">
             Product Name Name Name Name Name
           </h3>

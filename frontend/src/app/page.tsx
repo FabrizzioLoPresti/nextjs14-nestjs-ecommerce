@@ -11,7 +11,6 @@ export default function Home() {
       <About />
       <Products />
       <Newsletter />
-      {/* Formulario Contacto -> React Hook Form y Resend */}
       <Contact />
     </>
   );
