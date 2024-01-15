@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/providers/providers';
+import { getServerSession } from 'next-auth';
 import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/footer';
 
@@ -69,15 +70,16 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession();
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Providers>
+        <Providers session={session}>
           <Navbar />
           {children}
           <Footer />

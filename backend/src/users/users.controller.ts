@@ -7,32 +7,24 @@ import {
   Param,
   Delete,
   Res,
-  NotFoundException,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { handleError } from 'src/utils/utils';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) { }
 
-  private handleError(res: Response, error: Error) {
-    if (error instanceof NotFoundException) {
-      return res.status(404).json({ error: error.message });
-    }
-
-    return res.status(500).json({ error: 'Internal server error' });
-  }
-
   @Post()
-  async create(@Body() createUserDto: CreateUserDto) {
+  async create(@Body() createUserDto: CreateUserDto, @Res() res: Response) {
     try {
       const user = await this.usersService.create(createUserDto);
-      return user;
+      return res.status(201).json(user);
     } catch (error) {
-      throw error;
+      return handleError(res, error);
     }
   }
 
@@ -42,7 +34,7 @@ export class UsersController {
       const users = await this.usersService.findAll();
       return res.status(200).json(users);
     } catch (error) {
-      return this.handleError(res, error);
+      return handleError(res, error);
     }
   }
 

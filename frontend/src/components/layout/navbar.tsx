@@ -13,6 +13,7 @@ import {
   NavbarMenu,
   NavbarMenuItem,
 } from '@nextui-org/react';
+import AuthButton from './auth-button';
 
 type Props = {};
 
@@ -133,9 +134,7 @@ function NavbarFixed({
 
         <NavbarContent justify="end">
           <NavbarItem>
-            <Link href="#" className="button">
-              Login
-            </Link>
+            <AuthButton />
           </NavbarItem>
         </NavbarContent>
         <NavbarMenu className="overflow-y-hidden inset-0 navbar-height z-[100]">
@@ -182,7 +181,7 @@ function NavbarScroll({
       variants={NavAnimations}
       className="fixed z-50 left-1/2 top-10 backdrop-blur-md bg-zinc-700/60 rounded-full px-3 py-2"
     >
-      <nav className="flex items-center">
+      <nav className="flex items-center gap-x-2">
         <Link
           href={'/products'}
           className="px-2 text-white text-sm hover:text-gray-700 transition-colors ease-in-out"
@@ -201,12 +200,7 @@ function NavbarScroll({
         >
           Integrations
         </Link>
-        <Link
-          href={'/'}
-          className="px-4 py-2 ml-2 text-white bg-zinc-800 rounded-full text-sm border border-zinc-700 hover:bg-zinc-600 hover:border-zinc-500 transition-all ease-in-out"
-        >
-          Login
-        </Link>
+        <AuthButton />
       </nav>
     </motion.header>
   );

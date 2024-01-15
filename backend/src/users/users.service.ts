@@ -13,6 +13,8 @@ export class UsersService {
       return user;
     } catch (error) {
       throw error;
+    } finally {
+      await this.prisma.$disconnect();
     }
   }
 
@@ -27,6 +29,8 @@ export class UsersService {
       return users;
     } catch (error) {
       throw error;
+    } finally {
+      await this.prisma.$disconnect();
     }
   }
 
