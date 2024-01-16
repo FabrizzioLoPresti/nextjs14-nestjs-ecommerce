@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Res,
+  Query,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { ProductsService } from './products.service';
@@ -32,9 +33,13 @@ export class ProductsController {
   }
 
   @Get()
-  async findAll(@Res() res: Response) {
+  async findAll(
+    @Query('page') page: number = 1, // Página por defecto es la 1
+    @Query('pageSize') pageSize: number = 10, // Tamaño de la página por defecto es 10
+    @Res() res: Response,
+  ) {
     try {
-      const products = await this.productsService.findAll();
+      const products = await this.productsService.findAll(page, pageSize);
       return res.status(200).json(products);
     } catch (error) {
       return handleError(res, error);

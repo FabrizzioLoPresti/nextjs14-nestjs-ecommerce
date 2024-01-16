@@ -7,7 +7,7 @@ type Props = {};
 
 const Sidebar = (props: Props) => {
   return (
-    <aside className="flex flex-col gap-4">
+    <aside className="flex flex-col gap-4 h-full sticky top-20 left-0">
       <Link href="/dashboard">Home</Link>
       <Link href="/dashboard/settings">Settings</Link>
       <button className="button" onClick={() => signOut()}>

@@ -20,9 +20,13 @@ export class ProductsService {
     }
   }
 
-  async findAll() {
+  async findAll(page: number, pageSize: number) {
     try {
+      const skip = (page - 1) * pageSize;
+
       const products = await this.prisma.products.findMany({
+        skip,
+        take: pageSize,
         include: {
           Categories: true,
         },

@@ -4,7 +4,16 @@ type Props = {};
 
 const Sidebar = (props: Props) => {
   return (
-    <aside className="flex flex-row lg:flex-col gap-4 justify-between lg:justify-normal">
+    <aside className="flex flex-row flex-wrap lg:flex-col gap-4 justify-between lg:justify-normal lg:sticky lg:top-20 lg:left-0 h-full">
+      <div>
+        <h2 className="font-bold text-2xl">Order By</h2>
+        <ul className="flex flex-col">
+          <Link href="/products?sort=price">Price (Low to High)</Link>
+          <Link href="/products?sort=-price">Price (High to Low)</Link>
+          <Link href="/products?sort=-created_at">Newest</Link>
+        </ul>
+      </div>
+
       <div>
         <h2 className="font-bold text-2xl">Categories</h2>
         <ul className="flex flex-col">
