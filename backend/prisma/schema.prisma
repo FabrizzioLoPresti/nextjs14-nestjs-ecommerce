@@ -15,7 +15,7 @@ model Users {
   email     String   @unique
   username  String   @unique
   name      String?
-  password  String
+  password  String?
   phone     String?
   active    Boolean  @default(true)
   createdAt DateTime @default(now())

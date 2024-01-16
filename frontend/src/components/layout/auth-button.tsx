@@ -9,9 +9,6 @@ const AuthButton = (props: Props) => {
 
   if (session) {
     return (
-      // <button className="button" onClick={() => signOut()}>
-      //   Logout
-      // </button>
       <Link href="/dashboard">
         <Image
           src={session?.user?.image ?? ''}
@@ -21,7 +18,6 @@ const AuthButton = (props: Props) => {
           className="rounded-full border border-zinc-400"
         />
       </Link>
-      // Loading and Error Pages
     );
   }
 
