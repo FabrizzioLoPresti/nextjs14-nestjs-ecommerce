@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import Link from 'next/link';
 import { IconHexagon } from '@tabler/icons-react';
 import Animation from './animation';
@@ -29,7 +30,9 @@ const Hero = (props: Props) => {
         </div>
 
         <div className="hidden xl:block">
-          <Animation />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Animation />
+          </Suspense>
         </div>
       </div>
     </section>
