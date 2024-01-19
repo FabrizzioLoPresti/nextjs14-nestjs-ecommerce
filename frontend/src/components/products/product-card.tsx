@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { type Session } from 'next-auth';
 import {
   IconHeart,
   IconHeartFilled,
@@ -9,9 +10,10 @@ import { ProductType } from '@/types/types';
 
 type Props = {
   product: ProductType;
+  session: Session | null;
 };
 
-const ProductCard = ({ product }: Props) => {
+const ProductCard = async ({ product, session }: Props) => {
   return (
     <article className="w-fit max-w-[300px] h-[460px] flex flex-col justify-between bg-zinc-500 overflow-hidden rounded-md shadow-md mx-auto">
       <Link
@@ -40,7 +42,10 @@ const ProductCard = ({ product }: Props) => {
               <IconHeart width={24} height={24} className="text-zinc-300" />
             </button>
           </div>
-          <button className="button w-full flex flex-row gap-x-2 items-center justify-center">
+          <button
+            className="button w-full flex flex-row gap-x-2 items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={!session}
+          >
             <IconShoppingCart width={24} height={24} />
             Add to cart
           </button>

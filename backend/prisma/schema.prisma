@@ -11,15 +11,16 @@ datasource db {
 }
 
 model Users {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  username  String   @unique
-  name      String?
-  password  String?
-  phone     String?
-  active    Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String          @id @default(uuid())
+  email         String          @unique
+  username      String          @unique
+  name          String?
+  password      String?
+  phone         String?
+  active        Boolean         @default(true)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  ShoppingCarts ShoppingCarts[]
 }
 
 model Categories {
@@ -40,15 +41,37 @@ model Profitability {
 }
 
 model Products {
-  id          String      @id @default(uuid())
-  name        String      @unique
-  description String?
-  images_url  String[]
-  list_price  Decimal     @db.Decimal(9, 2)
-  stock       Int
-  category_id String
-  active      Boolean     @default(true)
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  Categories  Categories? @relation(fields: [category_id], references: [id])
+  id                  String                @id @default(uuid())
+  name                String                @unique
+  description         String?
+  images_url          String[]
+  list_price          Decimal               @db.Decimal(9, 2)
+  stock               Int
+  category_id         String
+  active              Boolean               @default(true)
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  Categories          Categories?           @relation(fields: [category_id], references: [id])
+  ShoppingCartDetails ShoppingCartDetails[]
+}
+
+model ShoppingCarts {
+  id                  String                @id @default(uuid())
+  user_id             String                @unique
+  active              Boolean               @default(true)
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  Users               Users?                @relation(fields: [user_id], references: [id])
+  ShoppingCartDetails ShoppingCartDetails[]
+}
+
+model ShoppingCartDetails {
+  id               String         @id @default(uuid())
+  shopping_cart_id String
+  product_id       String
+  quantity         Int
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  ShoppingCarts    ShoppingCarts? @relation(fields: [shopping_cart_id], references: [id])
+  Products         Products?      @relation(fields: [product_id], references: [id])
 }

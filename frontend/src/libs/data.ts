@@ -22,3 +22,17 @@ export const fetchProduct = async (id: string) => {
   const data = await res.json();
   return data;
 };
+
+export const fetchShoppingCart = async (email: string) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/shopping-carts?email=${email}`,
+    {
+      cache: 'no-cache',
+      next: {
+        tags: ['shopping-cart'],
+      },
+    },
+  );
+  const data = await res.json();
+  return data;
+}

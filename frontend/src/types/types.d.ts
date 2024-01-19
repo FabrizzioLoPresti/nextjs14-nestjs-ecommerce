@@ -1,26 +1,5 @@
 import { type Profile } from "next-auth";
 
-export type ProductType = {
-  id?: string;
-  name: string;
-  description?: string;
-  images_url: string[];
-  list_price: number;
-  stock: number;
-  active: boolean;
-  createdAt?: Date;
-  updatedAt?: Date;
-  Categories?: Category;
-}
-
-export type CategoryType = {
-  id?: string;
-  name: string;
-  active: boolean;
-  createdAt?: Date;
-  updatedAt?: Date;
-}
-
 export type GithubProfileType = {
   login: string;
   id: number;
@@ -68,4 +47,44 @@ export type Plan = {
   space: number;
   collaborators: number;
   private_repos: number;
+}
+
+export type ProductType = {
+  id?: string;
+  name: string;
+  description?: string;
+  images_url: string[];
+  list_price: number;
+  stock: number;
+  active: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+  Categories?: Category;
+}
+
+export type CategoryType = {
+  id?: string;
+  name: string;
+  active: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+export type ShoppingCartType = {
+  id: string;
+  user_id: string;
+  active: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  ShoppingCartDetails: ShoppingCartDetailType[];
+}
+
+export type ShoppingCartDetailType = {
+  id: string;
+  shopping_cart_id: string;
+  product_id: string;
+  quantity: number;
+  createdAt: Date;
+  updatedAt: Date;
+  Products: ProductType;
 }
