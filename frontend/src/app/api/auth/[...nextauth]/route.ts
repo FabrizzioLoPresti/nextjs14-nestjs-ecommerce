@@ -1,16 +1,18 @@
-import NextAuth from "next-auth"
+import NextAuth, { Session, User } from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 import { GithubProfileType } from "@/types/types"
+import { JWT } from "next-auth/jwt"
 
 const handler = NextAuth({
   providers: [
     GithubProvider({
+      name: "GitHub",
       clientId: process.env.GITHUB_ID ?? "",
-      clientSecret: process.env.GITHUB_SECRET ?? ""
+      clientSecret: process.env.GITHUB_SECRET ?? "",
     })
   ],
   callbacks: {
-    async signIn({ profile }) {
+    async signIn({ user, profile }) {
       const { name, login, email } = profile as GithubProfileType
 
       try {
@@ -23,13 +25,14 @@ const handler = NextAuth({
         })
 
         const responseData = await response.json();
-        console.log("Response status:", response.status);
-        console.log("Response data:", responseData);
 
         if (!response.ok && response.status !== 404) {
           throw new Error(responseData.message)
         }
 
+        if (response.ok) {
+          user.id = responseData.id
+        }
       } catch (error) {
         console.log(error)
         return false

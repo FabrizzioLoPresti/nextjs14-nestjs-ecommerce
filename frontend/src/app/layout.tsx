@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/providers/providers';
 import { getServerSession } from 'next-auth';
+import { Toaster } from 'sonner';
 import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/footer';
 
@@ -81,6 +82,7 @@ export default async function RootLayout({
       <body className={inter.className}>
         <Providers session={session}>
           <Navbar />
+          <Toaster position="top-right" expand={true} richColors />
           {children}
           <Footer />
         </Providers>

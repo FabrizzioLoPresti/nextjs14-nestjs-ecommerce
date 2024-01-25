@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { ProductType } from '@/types/types';
 import { fetchProduct } from '@/libs/data';
 import BreadcrumbCategory from '@/components/products/breadcrumb-category';
+import AddToCartButton from './add-cart-button';
 
 type Props = {
   id: string;
@@ -30,7 +31,7 @@ const ProductInfo = async ({ id }: Props) => {
         <h1 className="font-bold text-4xl mt-4">{product.name}</h1>
         <p className="text-gray-600">{product.description}</p>
         <p className="text-gray-600">Price: ${product.list_price}</p>
-        <button className="button mt-4">Add to cart</button>
+        <AddToCartButton product={product} />
       </div>
     </>
   );

@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="screens mt-24 min-h-screen flex flex-row gap-x-12">
+    <section className="screens mt-24 min-h-[100dvh] h-full flex flex-row gap-x-12">
       <Sidebar />
       {children}
     </section>

@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { type Session } from 'next-auth';
@@ -7,13 +9,16 @@ import {
   IconShoppingCart,
 } from '@tabler/icons-react';
 import { ProductType } from '@/types/types';
+import { addItemToCart } from '@/libs/actions';
+
+import { toast } from 'sonner';
 
 type Props = {
   product: ProductType;
   session: Session | null;
 };
 
-const ProductCard = async ({ product, session }: Props) => {
+const ProductCard = ({ product, session }: Props) => {
   return (
     <article className="w-fit max-w-[300px] h-[460px] flex flex-col justify-between bg-zinc-500 overflow-hidden rounded-md shadow-md mx-auto">
       <Link
@@ -45,6 +50,14 @@ const ProductCard = async ({ product, session }: Props) => {
           <button
             className="button w-full flex flex-row gap-x-2 items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={!session}
+            onClick={async () => {
+              await addItemToCart({
+                productId: product?.id ?? '',
+                quantity: 1,
+              });
+
+              toast.success('Product added to cart');
+            }}
           >
             <IconShoppingCart width={24} height={24} />
             Add to cart

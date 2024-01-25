@@ -14,7 +14,9 @@ export class UsersService {
       });
 
       if (userExists) {
-        throw new NotFoundException('User already exists');
+        // throw new NotFoundException('User already exists');
+        const { password, phone, ...restUser } = userExists;
+        return restUser;
       }
 
       const user = await this.prisma.users.create({ data: createUserDto });

@@ -31,7 +31,7 @@ const Hero = (props: Props) => {
 
         <div className="hidden xl:block">
           <Suspense fallback={<div>Loading...</div>}>
-            <Animation />
+            {/* <Animation /> */}
           </Suspense>
         </div>
       </div>

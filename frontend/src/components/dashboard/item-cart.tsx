@@ -2,7 +2,10 @@
 
 import Image from 'next/image';
 import { Select, SelectItem } from '@nextui-org/react';
+import { toast } from 'sonner';
+import { IconTrash } from '@tabler/icons-react';
 import { ShoppingCartDetailType } from '@/types/types';
+import { addItemToCart, removeItemFromCart } from '@/libs/actions';
 
 type Props = {
   item: ShoppingCartDetailType;
@@ -64,17 +67,37 @@ const ItemCart = ({ item }: Props) => {
       <div>
         <h2 className="text-xl">{item.Products.name}</h2>
         <p className="font-bold">${item.Products.list_price}</p>
-        <Select
-          label="Select a quantity"
-          className="w-80"
-          defaultSelectedKeys={[item.quantity.toString()]}
-        >
-          {quantities.map((q) => (
-            <SelectItem key={q.value} value={q.value}>
-              {q.label}
-            </SelectItem>
-          ))}
-        </Select>
+        <div className="flex flex-row items-center gap-x-6 mt-2">
+          <Select
+            label="Select a quantity"
+            className="w-80"
+            defaultSelectedKeys={[item.quantity.toString()]}
+            onChange={async (e) =>
+              await addItemToCart({
+                productId: item.Products.id ?? '',
+                quantity: parseInt(e.target.value),
+              })
+            }
+          >
+            {quantities.map((q) => (
+              <SelectItem key={q.value} value={q.value}>
+                {q.label}
+              </SelectItem>
+            ))}
+          </Select>
+          <button
+            className="button"
+            onClick={async () => {
+              await removeItemFromCart({
+                productId: item.Products.id ?? '',
+              });
+
+              toast.error('Product removed from cart');
+            }}
+          >
+            <IconTrash size={24} />
+          </button>
+        </div>
       </div>
     </div>
   );

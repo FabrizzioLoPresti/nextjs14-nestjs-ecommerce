@@ -72,6 +72,8 @@ model ShoppingCartDetails {
   quantity         Int
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
-  ShoppingCarts    ShoppingCarts? @relation(fields: [shopping_cart_id], references: [id])
+  ShoppingCarts    ShoppingCarts? @relation(fields: [shopping_cart_id], references: [id], onDelete: Cascade)
   Products         Products?      @relation(fields: [product_id], references: [id])
+
+  @@unique([shopping_cart_id, product_id], name: "unique_shopping_cart_product")
 }
