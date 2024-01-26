@@ -1,16 +1,13 @@
 import { redirect } from 'next/navigation';
 import { getServerSession } from 'next-auth';
 import { fetchShoppingCart } from '@/libs/data';
-import { ShoppingCartType } from '@/types/types';
 import ItemCart from '@/components/dashboard/item-cart';
 
 type Props = {};
 
 export default async function DashboardPage({}: Props) {
   const session = await getServerSession();
-  const shoppingCart: ShoppingCartType = await fetchShoppingCart(
-    session?.user?.email ?? '',
-  );
+  const shoppingCart = await fetchShoppingCart(session?.user?.email ?? '');
 
   if (!session) {
     redirect('/');

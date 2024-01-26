@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { ProductType } from '@/types/types';
 import { fetchProduct } from '@/libs/data';
 import BreadcrumbCategory from '@/components/products/breadcrumb-category';
 import AddToCartButton from './add-cart-button';
@@ -10,7 +9,7 @@ type Props = {
 };
 
 const ProductInfo = async ({ id }: Props) => {
-  const product: ProductType = await fetchProduct(id);
+  const product = await fetchProduct(id);
 
   if (!product.id) {
     return notFound();

@@ -8,3 +8,18 @@ export const handleError = (res: Response, error: Error) => {
 
   return res.status(500).json({ error: 'Internal server error' });
 };
+
+export const getOrderCriteria = (
+  sort: string,
+): { [key: string]: 'asc' | 'desc' } | undefined => {
+  switch (sort) {
+    case 'PriceLowToHigh':
+      return { list_price: 'asc' };
+    case 'PriceHighToLow':
+      return { list_price: 'desc' };
+    case 'Newest':
+      return { createdAt: 'desc' };
+    default:
+      return undefined; // No order specified
+  }
+};

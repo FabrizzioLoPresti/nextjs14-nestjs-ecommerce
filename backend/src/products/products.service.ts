@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { getOrderCriteria } from 'src/utils/utils';
 
 @Injectable()
 export class ProductsService {
@@ -20,16 +21,28 @@ export class ProductsService {
     }
   }
 
-  async findAll(page: number, pageSize: number) {
+  async findAll(
+    page: number,
+    pageSize: number,
+    category: string,
+    sort: string,
+  ) {
     try {
       const skip = (page - 1) * pageSize;
+      const order = getOrderCriteria(sort);
 
       const products = await this.prisma.products.findMany({
         skip,
-        take: pageSize,
+        take: Number(pageSize),
+        where: {
+          Categories: {
+            name: category,
+          },
+        },
         include: {
           Categories: true,
         },
+        orderBy: order,
       });
 
       if (!products || !products.length) {
@@ -38,6 +51,7 @@ export class ProductsService {
 
       return products;
     } catch (error) {
+      console.log(error);
       throw error;
     } finally {
       await this.prisma.$disconnect();

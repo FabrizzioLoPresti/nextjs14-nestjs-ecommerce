@@ -36,10 +36,17 @@ export class ProductsController {
   async findAll(
     @Query('page') page: number = 1, // Página por defecto es la 1
     @Query('pageSize') pageSize: number = 10, // Tamaño de la página por defecto es 10
+    @Query('category') category: string,
+    @Query('sort') sort: string,
     @Res() res: Response,
   ) {
     try {
-      const products = await this.productsService.findAll(page, pageSize);
+      const products = await this.productsService.findAll(
+        page,
+        pageSize,
+        category,
+        sort,
+      );
       return res.status(200).json(products);
     } catch (error) {
       return handleError(res, error);
