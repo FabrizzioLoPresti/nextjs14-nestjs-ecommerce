@@ -1,4 +1,4 @@
-import { CategoryType, ProductType, ShoppingCartType } from "@/types/types";
+import { CategoryType, FilterType, ProductType, ShoppingCartType } from "@/types/types";
 
 export const fetchCategories = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`, {
@@ -11,9 +11,9 @@ export const fetchCategories = async () => {
   return data;
 }
 
-export const fetchProducts = async (page: number, pageSize: number) => {
+export const fetchProducts = async (page: number, pageSize: number, filters: FilterType) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/products?page=${page}&pageZise=${pageSize}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/products?page=${page}&pageZise=${pageSize}&category=${filters.category ?? ''}&sort=${filters.sort ?? ''}`,
     {
       cache: 'no-cache',
       next: {

@@ -36,7 +36,7 @@ export class ProductsService {
         take: Number(pageSize),
         where: {
           Categories: {
-            name: category,
+            name: category || undefined,
           },
         },
         include: {

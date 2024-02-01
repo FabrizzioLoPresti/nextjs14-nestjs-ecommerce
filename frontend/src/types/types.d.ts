@@ -96,3 +96,8 @@ export type ShoppingCartDetailType = {
   updatedAt: Date;
   Products: ProductType;
 }
+
+export type FilterType = {
+  sort?: string;
+  category?: string;
+}
